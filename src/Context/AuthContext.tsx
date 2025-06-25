@@ -41,7 +41,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
 		setLoading(true);
 		try {
 			const response = await authService.login(credentials);
-			localStorage.setItem(STORAGE_KEYS.accessToken, response.accessToken);
+			localStorage.setItem(STORAGE_KEYS.accessToken, response.token);
 			localStorage.setItem(STORAGE_KEYS.user, JSON.stringify(response.user));
 			setUser(response.user);
 		} catch (e) {

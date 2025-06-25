@@ -4,14 +4,14 @@ import GlobalLayout from "../Layouts/GlobalLayout";
 import AuthLayout from "../Layouts/Auth/AuthLayout";
 import MainLayout from "../Layouts/MainLayout";
 import Login from "../../Features/Auth/Components/Login/Login";
-import BotsDashboard from "@/Features/Bots/BotsDashboard";
 import PrivateRoute from "@/Features/Auth/AuthRoute/PrivateRoute";
 import PublicRoute from "@/Features/Auth/AuthRoute/PublicRoute";
-import HomeDashboard from "@/Features/Home/HomeDashboard";
-import UsersDashboard from "@/Features/Users/UsersDashboard";
-import TenantsDashboard from "@/Features/Tenants/TenantsDashboard";
-import ImportExportDashboard from "@/Features/ImportExport/ImportExportDashboard";
-import AnalyticsDashboard from "@/Features/Analytics/AnalyticsDashboard";
+import HomeDashboard from "@/Features/Admin/Home/HomeDashboard";
+import UsersDashboard from "@/Features/Admin/Users/UsersDashboard";
+import TenantsDashboard from "@/Features/Admin/Tenants/TenantsDashboard";
+import ImportExportDashboard from "@/Features/Admin/ImportExport/ImportExportDashboard";
+import AnalyticsDashboard from "@/Features/Admin/Analytics/AnalyticsDashboard";
+import UserProfileDashboard from "@/Features/Admin/Users/UserProfile/UserProfileDashboard";
 
 export const routesConfig: RouteObject[] = [
 	{
@@ -37,6 +37,12 @@ export const routesConfig: RouteObject[] = [
 						),
 					},
           {
+						path: paths.profile.root,
+						element: (
+								<PrivateRoute><UserProfileDashboard /></PrivateRoute>
+						),
+					},
+          {
 						path: paths.users.root,
 						element: (
 								<PrivateRoute><UsersDashboard /></PrivateRoute>
@@ -46,12 +52,6 @@ export const routesConfig: RouteObject[] = [
 						path: paths.tenants.root,
 						element: (
 								<PrivateRoute><TenantsDashboard /></PrivateRoute>
-						),
-					},
-					{
-						path: paths.bots.root,
-						element: (
-								<PrivateRoute><BotsDashboard /></PrivateRoute>
 						),
 					},
           {

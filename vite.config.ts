@@ -1,8 +1,8 @@
-import { defineConfig } from "vite";
-import react from "@vitejs/plugin-react";
-import tailwindcss from "@tailwindcss/vite";
-import path from "path";
-import { fileURLToPath } from "url";
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
+import tailwindcss from '@tailwindcss/vite';
+import path from 'path';
+import { fileURLToPath } from 'url';
 
 // Resolve paths
 const __filename = fileURLToPath(import.meta.url);
@@ -12,11 +12,11 @@ export default defineConfig({
   plugins: [react(), tailwindcss()],
   resolve: {
     alias: {
-      "@": path.resolve(__dirname, "./src"),
-      "@assets": path.resolve(__dirname, "src/Assets"),
-      "@features": path.resolve(__dirname, "src/Features"),
-      "@services": path.resolve(__dirname, "src/Services"),
-      "@utils": path.resolve(__dirname, "src/Utils"),
+      '@': path.resolve(__dirname, './src'),
+      '@assets': path.resolve(__dirname, 'src/Assets'),
+      '@features': path.resolve(__dirname, 'src/Features'),
+      '@services': path.resolve(__dirname, 'src/Services'),
+      '@utils': path.resolve(__dirname, 'src/Utils'),
     },
   },
   css: {
@@ -25,13 +25,13 @@ export default defineConfig({
     },
   },
   server: {
-    port: 3000,
+    port: 4000,
     strictPort: true,
     host: true,
-    origin: "http://localhost:3000",
+    origin: 'http://localhost:4000',
   },
   preview: {
-    port: 3000,
+    port: 4000,
     strictPort: true,
   },
 });

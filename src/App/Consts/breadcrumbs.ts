@@ -15,10 +15,6 @@ export const BREADCRUMBS: Record<string, BreadCrumbItem[]> = {
     { path: paths.home.root, label: "Home" },
     { path: paths.tenants.root, label: "Tenants" },
   ],
-  BOTS: [
-    { path: paths.home.root, label: "Home" },
-    { path: paths.bots.root, label: "Bots" },
-  ],
   IMPORT_EXPORT: [
     { path: paths.home.root, label: "Home" },
     { path: paths.importExport.root, label: "Import/Export" },

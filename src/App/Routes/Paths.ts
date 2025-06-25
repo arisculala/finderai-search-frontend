@@ -1,34 +1,29 @@
 export const paths = {
   auth: {
-    login: "/login",
-    register: "/register",
+    login: '/login',
+    register: '/register',
   },
   home: {
-    root: "/home",
+    root: '/home',
+  },
+  profile: {
+    root: '/profile',
   },
   users: {
-    root: "/users",
-    create: "/users/create",
+    root: '/users',
+    create: '/users/create',
   },
   tenants: {
-    root: "/tenants",
-    create: "/tenants/create",
-    update: "/tenants/:tenantId/update",
-    settings: "/tenants/:tenantId/settings",
-    members: "/tenants/:tenantId/members",
-  },
-  bots: {
-    root: "/bots",
-    create: "/bots/create",
-    update: "/bots/:botId/update",
-    configuration: "/bots/:botId/configuration",
-    versioning: "/bots/:botId/versioning",
-    lifecycle: "/bots/:botId/lifecycle",
+    root: '/tenants',
+    create: '/tenants/create',
+    update: '/tenants/:tenantId/update',
+    settings: '/tenants/:tenantId/settings',
+    members: '/tenants/:tenantId/members',
   },
   importExport: {
-    root: "/imports-exports",
+    root: '/imports-exports',
   },
   analytics: {
-    root: "/analytics",
+    root: '/analytics',
   },
 };

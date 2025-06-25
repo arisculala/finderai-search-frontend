@@ -4,11 +4,13 @@ export interface LoginCredentials {
 }
 
 export interface LoginResponse {
-  accessToken: string;
-  refreshToken?: string;
+  token: string;
   user: {
+    id: string;
     username: string;
     email: string;
-    fullName: string;
+    firstName: string;
+    lastName: string;
+    deleted: boolean;
   };
 }

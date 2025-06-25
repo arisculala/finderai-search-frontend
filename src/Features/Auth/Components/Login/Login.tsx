@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import toast from 'react-hot-toast';
 import { useNavigate } from "react-router-dom";
 import type { LoginCredentials } from "@/Services/auth/auth.types";
 import { useAuth } from "@/Context/AuthContext";
@@ -24,9 +23,9 @@ const Login: React.FC = () => {
 
 		try {
 			await login(credentials);
-			navigate(paths.bots.root);
-		} catch {
-			toast.error("Login failed. Please check your credentials.");
+			navigate(paths.home.root);
+		} catch(e) {
+      console.error("Failed to login.", e);
 		} finally {
 			setLoading(false);
 		}
