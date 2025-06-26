@@ -1,16 +1,18 @@
 import type { User } from '../user/user.types';
 
-export interface Tenant {
+export interface Dataset {
   _id: number;
   name: string;
+  ownerTenantId: Dataset;
+  sharedWithTenants: Dataset[];
   createdDate: string;
   createdBy: User;
   updatedDate: string;
   updatedBy: User;
-  active: boolean;
 }
 
-export interface CreateTenant {
+export interface CreateDataset {
   name: string;
-  active: boolean;
+  ownerTenantId: string;
+  sharedWithTenants: string[];
 }

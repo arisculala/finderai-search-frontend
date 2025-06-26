@@ -11,14 +11,12 @@ export const paths = {
   },
   users: {
     root: '/users',
-    create: '/users/create',
   },
   tenants: {
     root: '/tenants',
-    create: '/tenants/create',
-    update: '/tenants/:tenantId/update',
-    settings: '/tenants/:tenantId/settings',
-    members: '/tenants/:tenantId/members',
+  },
+  datasets: {
+    root: '/datasets',
   },
   importExport: {
     root: '/imports-exports',

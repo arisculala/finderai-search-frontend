@@ -1,5 +1,11 @@
 import React, { useState, useEffect, type JSX } from "react";
-import { EllipsisVerticalIcon, MagnifyingGlassIcon, TableCellsIcon, ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
+import {
+  EllipsisVerticalIcon,
+  MagnifyingGlassIcon,
+  TableCellsIcon,
+  ChevronLeftIcon,
+  ChevronRightIcon,
+} from "@heroicons/react/24/outline";
 
 interface TableAction {
   label: string;
@@ -9,7 +15,6 @@ interface TableAction {
 }
 
 interface TableRow {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [key: string]: any;
   actions?: TableAction[];
 }
@@ -52,12 +57,12 @@ const TableList: React.FC<TableProps> = ({
   const [filteredData, setFilteredData] = useState<TableRow[]>(data);
 
   useEffect(() => {
-    const filtered = data.filter((row) => {
-      return headers.some((header) => {
+    const filtered = data.filter((row) =>
+      headers.some((header) => {
         const value = row[header];
         return value?.toString().toLowerCase().includes(searchTerm.toLowerCase());
-      });
-    });
+      })
+    );
     setFilteredData(filtered);
   }, [data, headers, searchTerm]);
 
@@ -75,7 +80,6 @@ const TableList: React.FC<TableProps> = ({
     return header.replace(/([A-Z])/g, " $1").replace(/^./, (str) => str.toUpperCase());
   };
 
-  // Simplified pagination display
   const renderPageNumbers = () => {
     const pagesToShow = 5;
     let startPage = Math.max(1, currentPage - Math.floor(pagesToShow / 2));
@@ -101,7 +105,7 @@ const TableList: React.FC<TableProps> = ({
   };
 
   return (
-    <div className="border rounded-lg overflow-hidden bg-white dark:bg-gray-800 dark:border-gray-700 shadow-sm">
+    <div className="border rounded-lg overflow-visible bg-white dark:bg-gray-800 dark:border-gray-700 shadow-sm">
       {(showHeaderTitle || showHeaderSearch) && (
         <div className="p-4 flex justify-between items-center bg-gray-50 dark:bg-gray-700">
           <div className="flex items-center gap-4">
@@ -135,20 +139,17 @@ const TableList: React.FC<TableProps> = ({
         </div>
       )}
 
-
-      <div className="overflow-x-auto">
+      <div className="overflow-x-auto relative">
         <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
           <thead className="bg-gray-50 dark:bg-gray-700">
             <tr>
               {showSNo && (
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
-                  #
-                </th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">#</th>
               )}
               {headers.map((header) => (
                 <th
                   key={header}
-                  className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors"
+                  className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider"
                 >
                   {formatHeader(header)}
                 </th>
@@ -163,10 +164,7 @@ const TableList: React.FC<TableProps> = ({
           <tbody className="bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700">
             {paginatedData.length > 0 ? (
               paginatedData.map((row, idx) => (
-                <tr
-                  key={idx}
-                  className="hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
-                >
+                <tr key={idx} className="hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
                   {showSNo && (
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">
                       {startIdx + idx + 1}
@@ -175,7 +173,7 @@ const TableList: React.FC<TableProps> = ({
                   {headers.map((header) => (
                     <td
                       key={header}
-                      className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 transition-colors"
+                      className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400"
                     >
                       {header === "status" ? (
                         <span
@@ -193,7 +191,7 @@ const TableList: React.FC<TableProps> = ({
                     </td>
                   ))}
                   {showActions && (
-                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium relative">
                       {showActionInEllipses ? (
                         <div className="relative">
                           <button
@@ -203,7 +201,7 @@ const TableList: React.FC<TableProps> = ({
                             <EllipsisVerticalIcon className="h-5 w-5" />
                           </button>
                           {expandedActions === idx && (
-                            <div className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 dark:bg-gray-700 dark:ring-gray-600">
+                            <div className="absolute right-0 z-50 mt-2 w-48 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 dark:bg-gray-700 dark:ring-gray-600">
                               {row.actions?.map((action, i) => (
                                 <button
                                   key={i}
@@ -212,7 +210,7 @@ const TableList: React.FC<TableProps> = ({
                                     action.onClick();
                                     setExpandedActions(null);
                                   }}
-                                  className="curson-pointer block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 w-full text-left transition-colors"
+                                  className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600"
                                 >
                                   <div className="flex items-center gap-2">
                                     {action.icon}
@@ -231,7 +229,7 @@ const TableList: React.FC<TableProps> = ({
                               onClick={action.onClick}
                               className={`curson-pointer px-3 py-1 rounded text-xs flex items-center gap-1 transition-colors ${
                                 action.className ||
-                                "curson-pointer bg-blue-500 text-white hover:bg-blue-600 dark:bg-blue-600 dark:hover:bg-blue-700"
+                                "bg-blue-500 text-white hover:bg-blue-600 dark:bg-blue-600 dark:hover:bg-blue-700"
                               }`}
                             >
                               {action.icon}

@@ -3,6 +3,7 @@ import {
   ChartBarIcon,
   BuildingOffice2Icon,
   ArrowUpTrayIcon,
+  DocumentTextIcon,
 } from '@heroicons/react/24/outline';
 import { useNavigate } from 'react-router-dom';
 import { paths } from "@/App/Routes/Paths";
@@ -21,6 +22,13 @@ const options = [
     icon: BuildingOffice2Icon,
     bgColor: 'bg-yellow-500',
     path: `${paths.tenants.root}`,
+  },
+  {
+    title: 'Manage Datasets',
+    description: 'Organize and manage datasets across your platform.',
+    icon: DocumentTextIcon,
+    bgColor: 'bg-blue-500',
+    path: `${paths.datasets.root}`,
   },
   {
     title: 'Import / Export',
@@ -44,10 +52,10 @@ export default function Home() {
   return (
     <div className="max-w-4xl mx-auto px-6 py-12">
       <h2 className="text-xl font-semibold text-gray-800 dark:text-white">
-        FinderAI Chat Admin
+        FinderAI Search Admin
       </h2>
       <p className="mt-2 text-sm text-gray-500 dark:text-gray-400">
-        FinderAI Chat Admin allows you to manage bots, users, and tenants, analyze engagement, and streamline your chat infrastructure.
+        FinderAI Search Admin allows you to manage users, and tenants, analyze datasets, and streamline your search infrastructure.
       </p>
 
       <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-6">

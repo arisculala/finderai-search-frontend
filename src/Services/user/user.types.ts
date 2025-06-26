@@ -11,22 +11,24 @@ export interface User {
   phoneNumber: number;
   roles: Role[];
   active: boolean;
-  createDate?: string;
+  createdDate?: string;
   updatedDate?: string;
-  createdBy?: string;
-  updatedBy?: string;
+  createdBy?: User;
+  updatedBy?: User;
+}
+
+export interface CreateUser {
+  username: string;
+  email: string;
+  firstName: string;
+  lastName: string;
+  role: string;
+  phoneNumber: number;
+  active: boolean;
 }
 
 export interface Role {
   id: number;
   name: 'user' | 'admin' | 'tenantAdmin' | string;
   description?: string;
-  permissions: Permission[];
-}
-
-export interface Permission {
-  id: number;
-  name: string; // e.g., "user:create", "chat:view", "admin:manage"
-  description?: string;
-  module?: string; // optional grouping (e.g., "user", "chat", "tenant")
 }

@@ -26,4 +26,13 @@ api.interceptors.response.use(
   }
 );
 
+// Helper to merge custom headers
+export const withHeaders = (headers = {}) => {
+  return {
+    headers: {
+      ...headers,
+    },
+  };
+};
+
 export default api;

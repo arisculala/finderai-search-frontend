@@ -5,6 +5,7 @@ import cookieParser from 'cookie-parser';
 import authRoutes from './routes/auth';
 import userRoutes from './routes/users';
 import tenantRoutes from './routes/tenants';
+import datasetRoutes from './routes/datasets';
 
 dotenv.config();
 
@@ -26,6 +27,7 @@ app.use(
 app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/tenants', tenantRoutes);
+app.use('/api/datasets', datasetRoutes);
 
 // Start server
 const PORT = 3003;

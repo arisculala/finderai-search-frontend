@@ -4,6 +4,7 @@ import {
   ArrowUpTrayIcon,
   ChartBarIcon,
   HomeIcon,
+  DocumentTextIcon,
 } from '@heroicons/react/24/outline';
 import { paths } from "@/App/Routes/Paths";
 import { useLocation } from 'react-router-dom';
@@ -12,6 +13,7 @@ const navigation = [
   { name: 'Home', icon: HomeIcon, path: `${paths.home.root}` },
   { name: 'Users', icon: UserGroupIcon, path: `${paths.users.root}` },
   { name: 'Tenants', icon: BuildingOffice2Icon, path: `${paths.tenants.root}` },
+  { name: 'Datasets', icon: DocumentTextIcon, path: `${paths.datasets.root}` },
   { name: 'Import/Export', icon: ArrowUpTrayIcon, path: `${paths.importExport.root}` },
   { name: 'Analytics', icon: ChartBarIcon, path: `${paths.analytics.root}` },
 ];
