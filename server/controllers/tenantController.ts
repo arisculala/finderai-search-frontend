@@ -47,3 +47,20 @@ export const addTenantToUsers = withAxiosHandler(async (axios, req, res) => {
   );
   res.status(200).json(response.data);
 });
+
+export const removeTenantFromUsers = withAxiosHandler(
+  async (axios, req, res) => {
+    const response = await axios.post(
+      `/tenants/${req.params.id}/users/remove`,
+      req.body
+    );
+    res.status(200).json(response.data);
+  }
+);
+
+export const getDatasetsForTenant = withAxiosHandler(
+  async (axios, req, res) => {
+    const response = await axios.get(`/tenants/${req.params.id}/datasets`);
+    res.json(response.data);
+  }
+);

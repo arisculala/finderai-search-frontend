@@ -10,6 +10,7 @@ export interface Dataset {
   createdBy: User;
   updatedDate: string;
   updatedBy: User;
+  isOwner?: boolean;
 }
 
 export interface CreateDataset {

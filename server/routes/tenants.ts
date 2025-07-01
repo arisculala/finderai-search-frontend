@@ -10,6 +10,8 @@ router.put('/:id', tenantController.updateTenant);
 router.put('/:id/active', tenantController.updateTenantActive);
 router.get('/:id/users', tenantController.getTenantUsers);
 router.post('/:id/users/add', tenantController.addTenantToUsers);
+router.post('/:id/users/remove', tenantController.removeTenantFromUsers);
 router.get('/:id/users/exclude', tenantController.getTenantExcludeUsers);
+router.get('/:id/datasets', tenantController.getDatasetsForTenant);
 
 export default router;

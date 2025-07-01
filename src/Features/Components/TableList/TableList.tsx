@@ -176,19 +176,21 @@ const TableList: React.FC<TableProps> = ({
                       key={header}
                       className="px-6 py-4 whitespace-normal text-sm text-gray-700 dark:text-gray-300"
                     >
-                      {header === "status" ? (
-                        <span
-                          className={`px-2 py-1 rounded-full text-xs ${
-                            row[header]?.toLowerCase() === "active"
-                              ? "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200"
-                              : "bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200"
-                          }`}
-                        >
-                          {row[header]}
-                        </span>
-                      ) : (
-                        row[header]
-                      )}
+                      {typeof row[header] === "boolean"
+                        ? row[header] ? "Yes" : "No"
+                        : header === "status"
+                        ? (
+                            <span
+                              className={`px-2 py-1 rounded-full text-xs ${
+                                row[header]?.toLowerCase() === "active"
+                                  ? "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200"
+                                  : "bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200"
+                              }`}
+                            >
+                              {row[header]}
+                            </span>
+                          )
+                        : row[header]}
                     </td>
                   ))}
                   {showActions && (

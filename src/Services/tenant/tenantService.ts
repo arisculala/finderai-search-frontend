@@ -2,6 +2,7 @@ import { getStoredUserId } from '@/Utils/getUser';
 import type { CreateTenant, Tenant } from './tenant.types';
 import api, { withHeaders } from '../axios';
 import type { User } from '../user/user.types';
+import type { Dataset } from '../dataset/dataset.types';
 
 export const createTenant = async (tenantData: Partial<CreateTenant>) => {
   try {
@@ -111,6 +112,31 @@ export const addTenantToUsers = async (
     return response.data;
   } catch (error) {
     console.error('Failed to add tenant users', error);
+    throw error;
+  }
+};
+
+export const removeTenantFromUsers = async (
+  id: string,
+  userIds: string[]
+): Promise<User[]> => {
+  try {
+    const response = await api.post<User[]>(`/tenants/${id}/users/remove`, {
+      userIds,
+    });
+    return response.data;
+  } catch (error) {
+    console.error('Failed to remove tenant from users', error);
+    throw error;
+  }
+};
+
+export const getDatasetsForTenant = async (id: string): Promise<Dataset[]> => {
+  try {
+    const response = await api.get<Dataset[]>(`/tenants/${id}/datasets`);
+    return response.data;
+  } catch (error) {
+    console.error('Failed to fetch tenant datasets', error);
     throw error;
   }
 };

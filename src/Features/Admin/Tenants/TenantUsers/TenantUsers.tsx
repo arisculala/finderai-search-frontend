@@ -1,6 +1,6 @@
 import TableList from "@/Features/Components/TableList/TableList";
 import type { Tenant } from "@/Services/tenant/tenant.types";
-import { getTenantUsers } from "@/Services/tenant/tenantService";
+import { getTenantUsers, removeTenantFromUsers } from "@/Services/tenant/tenantService";
 import type { User } from "@/Services/user/user.types";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
@@ -33,8 +33,15 @@ export default function TenantUsers({ tenant }: TenantUsersProps) {
     setIsAddTenantModalOpen(true);
   }
 
-  const handleRemoveTenantUser = (tenantUser: User) => {
-    console.log('CALLING . . . . . handleRemoveTenantUser clicked', tenantUser);
+  const handleRemoveTenantUser = async (tenantUser: User) => {
+    try {
+      await removeTenantFromUsers(tenant._id.toString(), [tenantUser._id.toString()]);
+      toast.success('Successfully remove tenant from user.');
+      fetchTenantUsers();
+    } catch (e) {
+      console.error('Failed to remove tenant from user.', e);
+      toast.error('Failed to add tenant user(s).');
+    }
   };
 
   const mappedTenantUsersList = tenantUsers.map((tenantUser) => ({

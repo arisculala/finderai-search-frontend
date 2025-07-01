@@ -14,6 +14,7 @@ import Breadcrumbs from "@/Features/Components/BreadCrumbs/BreadCrumbs";
 import { BREADCRUMBS } from "@/App/Consts";
 import TenantGeneralForm from "./TenantGeneralForm";
 import TenantUsers from "../TenantUsers/TenantUsers";
+import TenantDatasets from "./TenantDatasets";
 
 export default function TenantDetails() {
   const { id: tenantId } = useParams();
@@ -55,6 +56,14 @@ export default function TenantDetails() {
                 icon={<UserGroupIcon className="w-5 h-5 text-gray-600 dark:text-gray-300" />}
               >
                 <TenantUsers tenant={tenant} />
+              </CollapsibleContainer>
+
+              {/* Datasets Section */}
+              <CollapsibleContainer
+                headerText="Datasets"
+                icon={<UserGroupIcon className="w-5 h-5 text-gray-600 dark:text-gray-300" />}
+              >
+                <TenantDatasets tenant={tenant} />
               </CollapsibleContainer>
             </div>
           )}
