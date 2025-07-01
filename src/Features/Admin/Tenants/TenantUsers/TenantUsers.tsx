@@ -57,8 +57,8 @@ export default function TenantUsers({ tenant }: TenantUsersProps) {
   }));
 
   return (
-      <div className="flex h-screen bg-gray-50 dark:bg-gray-900">
-        <div className="flex flex-1 flex-col overflow-hidden">
+      <div className="flex flex-col bg-gray-50 dark:bg-gray-900 p-4 min-h-0">
+        <div className="flex-1 overflow-hidden">
           <TableList
 						data={mappedTenantUsersList}
 						headers={[
