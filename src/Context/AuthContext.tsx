@@ -2,6 +2,11 @@ import React, { createContext, useContext, useState, useEffect } from "react";
 import type { LoginCredentials, LoginResponse } from "@/Services/auth/auth.types";
 import * as authService from "@/Services/auth/authService";
 import { STORAGE_KEYS } from "@/App/Consts";
+import { jwtDecode } from "jwt-decode";
+
+interface DecodedToken {
+	exp: number;
+}
 
 interface AuthContextType {
 	user: LoginResponse["user"] | null;
@@ -14,28 +19,40 @@ interface AuthContextType {
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
-export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
-	children,
-}) => {
+export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
 	const [user, setUser] = useState<LoginResponse["user"] | null>(null);
 	const [loading, setLoading] = useState(false);
 	const [hydrated, setHydrated] = useState(false);
 
-	// Hydrate user from localStorage once on mount
 	useEffect(() => {
-    const storedUser = localStorage.getItem(STORAGE_KEYS.user);
-    if (storedUser) {
-      try {
-        setUser(JSON.parse(storedUser));
-      } catch (e) {
-        console.error("Failed to parse stored user", e);
-        setUser(null);
-      }
-    } else {
-      setUser(null);
-    }
-    setHydrated(true);
-  }, []);
+		const storedUser = localStorage.getItem(STORAGE_KEYS.user);
+		const token = localStorage.getItem(STORAGE_KEYS.accessToken);
+
+		if (storedUser && token) {
+			try {
+				const decoded = jwtDecode<DecodedToken>(token);
+				const isExpired = decoded.exp * 1000 < Date.now();
+
+				if (isExpired) {
+					console.warn("Token expired");
+					localStorage.removeItem(STORAGE_KEYS.accessToken);
+					localStorage.removeItem(STORAGE_KEYS.user);
+					setUser(null);
+				} else {
+					setUser(JSON.parse(storedUser));
+				}
+			} catch (e) {
+				console.error("Invalid token or failed to parse user", e);
+				localStorage.removeItem(STORAGE_KEYS.accessToken);
+				localStorage.removeItem(STORAGE_KEYS.user);
+				setUser(null);
+			}
+		} else {
+			setUser(null);
+		}
+
+		setHydrated(true);
+	}, []);
 
 	const login = async (credentials: LoginCredentials) => {
 		setLoading(true);
@@ -46,7 +63,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
 			setUser(response.user);
 		} catch (e) {
 			console.log("Error calling login");
-      throw e;
+			throw e;
 		} finally {
 			setLoading(false);
 		}

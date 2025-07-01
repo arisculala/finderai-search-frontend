@@ -11,8 +11,11 @@ import ConfirmationModal from "../../Components/ConfirmationModal/ConfirmationMo
 import Breadcrumbs from "@/Features/Components/BreadCrumbs/BreadCrumbs";
 import ContentModal from "@/Features/Components/ContentModal/ContentModal";
 import NewTenantFormModal from "./NewTenantFormModal";
+import { useNavigate } from "react-router-dom";
+import { paths } from "@/App/Routes/Paths";
 
 export default function TenantsDashboard() {
+  const navigate = useNavigate();
   const [tenants, setTenants] = useState<Tenant[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [isSetActiveInactiveModalOpen, setIsSetActiveInactiveModalOpen] = useState(false);
@@ -67,7 +70,7 @@ export default function TenantsDashboard() {
     actions: [
       {
         label: "Edit",
-        onClick: () => console.log("Edit clicked", tenant._id),
+        onClick: () => navigate(paths.tenants.details.replace(':id', tenant._id.toString())),
       },
       {
         label: tenant.active ? "Deactivate" : "Activate",

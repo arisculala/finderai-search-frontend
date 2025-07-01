@@ -76,9 +76,8 @@ const TableList: React.FC<TableProps> = ({
     setExpandedActions(expandedActions === index ? null : index);
   };
 
-  const formatHeader = (header: string) => {
-    return header.replace(/([A-Z])/g, " $1").replace(/^./, (str) => str.toUpperCase());
-  };
+  const formatHeader = (header: string) =>
+    header.replace(/([A-Z])/g, " $1").replace(/^./, (str) => str.toUpperCase());
 
   const renderPageNumbers = () => {
     const pagesToShow = 5;
@@ -140,11 +139,13 @@ const TableList: React.FC<TableProps> = ({
       )}
 
       <div className="overflow-x-auto relative">
-        <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+        <table className="w-full divide-y divide-gray-200 dark:divide-gray-700">
           <thead className="bg-gray-50 dark:bg-gray-700">
             <tr>
               {showSNo && (
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">#</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                  #
+                </th>
               )}
               {headers.map((header) => (
                 <th
@@ -166,14 +167,14 @@ const TableList: React.FC<TableProps> = ({
               paginatedData.map((row, idx) => (
                 <tr key={idx} className="hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
                   {showSNo && (
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">
+                    <td className="px-6 py-4 text-sm text-gray-500 dark:text-gray-400">
                       {startIdx + idx + 1}
                     </td>
                   )}
                   {headers.map((header) => (
                     <td
                       key={header}
-                      className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400"
+                      className="px-6 py-4 whitespace-normal text-sm text-gray-700 dark:text-gray-300"
                     >
                       {header === "status" ? (
                         <span
@@ -196,7 +197,7 @@ const TableList: React.FC<TableProps> = ({
                         <div className="relative">
                           <button
                             onClick={() => toggleActions(idx)}
-                            className="curson-pointer text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
+                            className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
                           >
                             <EllipsisVerticalIcon className="h-5 w-5" />
                           </button>
@@ -222,12 +223,12 @@ const TableList: React.FC<TableProps> = ({
                           )}
                         </div>
                       ) : (
-                        <div className="flex space-x-2">
+                        <div className="flex space-x-2 flex-wrap">
                           {row.actions?.map((action, i) => (
                             <button
                               key={i}
                               onClick={action.onClick}
-                              className={`curson-pointer px-3 py-1 rounded text-xs flex items-center gap-1 transition-colors ${
+                              className={`px-3 py-1 rounded text-xs flex items-center gap-1 transition-colors ${
                                 action.className ||
                                 "bg-blue-500 text-white hover:bg-blue-600 dark:bg-blue-600 dark:hover:bg-blue-700"
                               }`}

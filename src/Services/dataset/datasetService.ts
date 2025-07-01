@@ -4,11 +4,12 @@ import api, { withHeaders } from '../axios';
 
 export const createDataset = async (datasetData: Partial<CreateDataset>) => {
   try {
-    const { name, ownerTenantId, sharedWithTenants } = datasetData;
+    const { name, description, ownerTenantId, sharedWithTenants } = datasetData;
     const response = await api.post<CreateDataset>(
       `/datasets`,
       {
         name,
+        description,
         ownerTenantId,
         sharedWithTenants,
       },
@@ -45,11 +46,16 @@ export const getDataset = async (datasetId: string): Promise<Dataset> => {
   }
 };
 
-export const updateDataset = async (datasetId: string, name: string) => {
+export const updateDataset = async (
+  datasetId: string,
+  datasetData: Partial<CreateDataset>
+) => {
   try {
+    const { name, description, ownerTenantId, sharedWithTenants } = datasetData;
+
     const response = await api.put(
       `/datasets/${datasetId}`,
-      { name },
+      { name, description, ownerTenantId, sharedWithTenants },
       withHeaders({ 'x-user-id': getStoredUserId() })
     );
     return response.data;

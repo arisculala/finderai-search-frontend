@@ -14,6 +14,7 @@ export const paths = {
   },
   tenants: {
     root: '/tenants',
+    details: '/tenants/:id',
   },
   datasets: {
     root: '/datasets',

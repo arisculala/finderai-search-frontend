@@ -12,6 +12,7 @@ interface NewTenantFormModalProps {
 export default function NewTenantFormModal({ onCancel, onSuccess }: NewTenantFormModalProps) {
   const [newTenant, setNewTenant] = useState({
     name: '',
+    description: '',
     active: true,
   });
   
@@ -30,10 +31,10 @@ export default function NewTenantFormModal({ onCancel, onSuccess }: NewTenantFor
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const { name } = newTenant;
+    const { name, description } = newTenant;
 
     // Basic required field check
-    if (!name) {
+    if (!name || !description) {
       setError('All fields are required.');
       return;
     }
@@ -67,6 +68,7 @@ export default function NewTenantFormModal({ onCancel, onSuccess }: NewTenantFor
 
       {[
         ['Tenant Name', 'name', 'text'],
+        ['Description', 'description', 'textarea'],
       ].map(([label, name, type]) => (
         <div key={name}>
           <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">

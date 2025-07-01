@@ -38,6 +38,13 @@ export default function UserProfileDashboard() {
         <MainContent>
           {user && (
             <div className="space-y-8">
+              {/* Header Row */}
+              <div className="mb-4">
+                <h2 className="text-xl font-semibold text-gray-800 dark:text-gray-100">
+                  Profile
+                </h2>
+              </div>
+
               {/* General Section */}
               <CollapsibleContainer
                 headerText="General"

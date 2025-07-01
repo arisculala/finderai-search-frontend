@@ -13,6 +13,7 @@ import ImportExportDashboard from "@/Features/Admin/ImportExport/ImportExportDas
 import AnalyticsDashboard from "@/Features/Admin/Analytics/AnalyticsDashboard";
 import UserProfileDashboard from "@/Features/Admin/Users/UserProfile/UserProfileDashboard";
 import DatasetsDashboard from "@/Features/Admin/Datasets/DatasetsDashboard";
+import TenantDetails from "@/Features/Admin/Tenants/TenantDetails/TenantDetails";
 
 export const routesConfig: RouteObject[] = [
 	{
@@ -53,6 +54,12 @@ export const routesConfig: RouteObject[] = [
 						path: paths.tenants.root,
 						element: (
 								<PrivateRoute><TenantsDashboard /></PrivateRoute>
+						),
+					},
+          {
+						path: paths.tenants.details,
+						element: (
+								<PrivateRoute><TenantDetails /></PrivateRoute>
 						),
 					},
           {

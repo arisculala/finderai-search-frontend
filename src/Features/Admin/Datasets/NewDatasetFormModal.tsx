@@ -15,6 +15,7 @@ interface NewDatasetFormModalProps {
 export default function NewDatasetFormModal({ onCancel, onSuccess }: NewDatasetFormModalProps) {
   const [newDataset, setNewDataset] = useState({
     name: '',
+    description: '',
     ownerTenantId: '',
     sharedWithTenants: [] as string[],
   });
@@ -35,7 +36,6 @@ export default function NewDatasetFormModal({ onCancel, onSuccess }: NewDatasetF
         setTenantOptions(mapped);
       } catch (e) {
         console.log('Failed to load tenants', e);
-        toast.error('Failed to load tenants');
       }
     };
     fetchTenants();
@@ -53,10 +53,10 @@ export default function NewDatasetFormModal({ onCancel, onSuccess }: NewDatasetF
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const { name, ownerTenantId, sharedWithTenants } = newDataset;
+    const { name, description, ownerTenantId, sharedWithTenants } = newDataset;
 
     // Basic required field check
-    if (!name || !ownerTenantId) {
+    if (!name || !description || !ownerTenantId) {
       setError('All fields are required.');
       return;
     }
@@ -96,6 +96,7 @@ export default function NewDatasetFormModal({ onCancel, onSuccess }: NewDatasetF
 
       {[
         ['Dataset Name', 'name', 'text'],
+        ['Description', 'description', 'textarea'],
       ].map(([label, name, type]) => (
         <div key={name}>
           <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">

@@ -15,6 +15,11 @@ export const BREADCRUMBS: Record<string, BreadCrumbItem[]> = {
     { path: paths.home.root, label: 'Home' },
     { path: paths.tenants.root, label: 'Tenants' },
   ],
+  TENANT_DETAILS: [
+    { path: paths.home.root, label: 'Home' },
+    { path: paths.tenants.root, label: 'Tenants' },
+    { path: paths.tenants.details, label: 'Tenant Details' },
+  ],
   DATASETS: [
     { path: paths.home.root, label: 'Home' },
     { path: paths.datasets.root, label: 'Datasets' },
